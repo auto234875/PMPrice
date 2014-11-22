@@ -9,27 +9,33 @@
 #import "PMPriceParser.h"
 #import "TFHpple.h"
 #import "TFHppleElement.h"
+#import <UIKit/UIKit.h>
 
 @interface PMPriceParser ()
-@property (nonatomic,strong,readwrite) NSString* agBidPrice;
-@property (nonatomic,strong,readwrite) NSString* ptBidPrice;
-@property (nonatomic,strong,readwrite) NSString* auBidPrice;
-@property (nonatomic, strong,readwrite) NSString* pdBidPrice;
-@property (nonatomic,strong,readwrite) NSString* agAskPrice;
-@property (nonatomic,strong,readwrite) NSString* ptAskPrice;
-@property (nonatomic,strong,readwrite) NSString* auAskPrice;
-@property (nonatomic, strong,readwrite) NSString* pdAskPrice;
+@property (nonatomic,readwrite) CGFloat silverBidPrice;
+@property (nonatomic,readwrite) CGFloat platinumBidPrice;
+@property (nonatomic,readwrite) CGFloat goldBidPrice;
+@property (nonatomic,readwrite) CGFloat palladiumBidPrice;
+@property (nonatomic,readwrite) CGFloat silverAskPrice;
+@property (nonatomic,readwrite) CGFloat platinumAskPrice;
+@property (nonatomic,readwrite) CGFloat goldAskPrice;
+@property (nonatomic,readwrite) CGFloat palladiumAskPrice;
 
 @end
 @implementation PMPriceParser
 
 -(instancetype)init{
     self= [super init];
-    [self refreshPrice];
+    if (self) {
+        [self refreshPrice];
+    }
     return self;
     
 }
-
+-(CGFloat)turnPriceStringIntoFloat:(NSString*)string{
+    CGFloat priceFloat=[[string stringByReplacingOccurrencesOfString:@"," withString:@""] stringByReplacingOccurrencesOfString:@"$" withString:@""].floatValue;
+    return priceFloat;
+}
 -(void)refreshPrice{
     NSURL *apmexURL = [NSURL URLWithString:@"http://www.apmex.com"];
     NSData *apmexData = [NSData dataWithContentsOfURL:apmexURL];
@@ -49,13 +55,13 @@
     for (TFHppleElement *element in askPriceNode) {
         [askPrice addObject:[element text]];
     }
-    self.auBidPrice=[bidPrice objectAtIndex:0];
-    self.agBidPrice=[bidPrice objectAtIndex:1];
-    self.ptBidPrice=[bidPrice objectAtIndex:2];
-    self.pdBidPrice=[bidPrice objectAtIndex:3];
-    self.auAskPrice=[askPrice objectAtIndex:0];
-    self.agAskPrice=[askPrice objectAtIndex:1];
-    self.ptAskPrice=[askPrice objectAtIndex:2];
-    self.pdAskPrice=[askPrice objectAtIndex:3];
+    self.goldBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:0]];
+    self.silverBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:1]];
+    self.platinumBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:2]];
+    self.palladiumBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:3]];
+    self.goldAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:0]];
+    self.silverAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:1]];
+    self.platinumAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:2]];
+    self.palladiumAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:3]];
 }
 @end

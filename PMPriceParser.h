@@ -7,16 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface PMPriceParser : NSObject
-@property (nonatomic,strong,readonly) NSString* agBidPrice;
-@property (nonatomic,strong, readonly) NSString* ptBidPrice;
-@property (nonatomic,strong, readonly) NSString* auBidPrice;
-@property (nonatomic,strong,readonly) NSString* pdBidPrice;
-@property (nonatomic,strong,readonly) NSString* agAskPrice;
-@property (nonatomic,strong, readonly) NSString* ptAskPrice;
-@property (nonatomic,strong,readonly) NSString* auAskPrice;
-@property (nonatomic,strong, readonly) NSString* pdAskPrice;
+@property (nonatomic,readonly) CGFloat silverBidPrice;
+@property (nonatomic, readonly) CGFloat platinumBidPrice;
+@property (nonatomic, readonly) CGFloat goldBidPrice;
+@property (nonatomic,readonly) CGFloat palladiumBidPrice;
+@property (nonatomic,readonly) CGFloat silverAskPrice;
+@property (nonatomic, readonly) CGFloat platinumAskPrice;
+@property (nonatomic,readonly) CGFloat goldAskPrice;
+@property (nonatomic, readonly) CGFloat palladiumAskPrice;
 
 -(void)refreshPrice;
 
