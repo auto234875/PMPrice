@@ -12,14 +12,14 @@
 #import <UIKit/UIKit.h>
 
 @interface PMPriceParser ()
-@property (nonatomic,readwrite) CGFloat silverBidPrice;
-@property (nonatomic,readwrite) CGFloat platinumBidPrice;
-@property (nonatomic,readwrite) CGFloat goldBidPrice;
-@property (nonatomic,readwrite) CGFloat palladiumBidPrice;
-@property (nonatomic,readwrite) CGFloat silverAskPrice;
-@property (nonatomic,readwrite) CGFloat platinumAskPrice;
-@property (nonatomic,readwrite) CGFloat goldAskPrice;
-@property (nonatomic,readwrite) CGFloat palladiumAskPrice;
+@property (nonatomic,readwrite) CGFloat silverBidUSD;
+@property (nonatomic,readwrite) CGFloat platinumBidUSD;
+@property (nonatomic,readwrite) CGFloat goldBidUSD;
+@property (nonatomic,readwrite) CGFloat palladiumBidUSD;
+@property (nonatomic,readwrite) CGFloat silverAskUSD;
+@property (nonatomic,readwrite) CGFloat platinumAskUSD;
+@property (nonatomic,readwrite) CGFloat goldAskUSD;
+@property (nonatomic,readwrite) CGFloat palladiumAskUSD;
 
 @end
 @implementation PMPriceParser
@@ -40,28 +40,28 @@
     NSURL *apmexURL = [NSURL URLWithString:@"http://www.apmex.com"];
     NSData *apmexData = [NSData dataWithContentsOfURL:apmexURL];
     TFHpple *priceParser = [TFHpple hppleWithHTMLData:apmexData];
-    NSString *bidPriceXpathQueryString = @"//table[@class='table-spot-prices table-striped']/tbody/tr/td[@class='text-right']/span[@class='item-bid']";
-    NSString *askPriceXpathQueryString = @"//table[@class='table-spot-prices table-striped']/tbody/tr/td[@class='text-right']/span[@class='item-ask']";
-    NSArray *bidPriceNode = [priceParser searchWithXPathQuery:bidPriceXpathQueryString];
-    NSArray *askPriceNode = [priceParser searchWithXPathQuery:askPriceXpathQueryString];
+    NSString *bidUSDXpathQueryString = @"//table[@class='table-spot-prices table-striped']/tbody/tr/td[@class='text-right']/span[@class='item-bid']";
+    NSString *askUSDXpathQueryString = @"//table[@class='table-spot-prices table-striped']/tbody/tr/td[@class='text-right']/span[@class='item-ask']";
+    NSArray *bidUSDNode = [priceParser searchWithXPathQuery:bidUSDXpathQueryString];
+    NSArray *askUSDNode = [priceParser searchWithXPathQuery:askUSDXpathQueryString];
 
     
-    NSMutableArray *bidPrice = [[NSMutableArray alloc] initWithCapacity:4];
-    NSMutableArray *askPrice = [[NSMutableArray alloc] initWithCapacity:4];
+    NSMutableArray *bidUSD = [[NSMutableArray alloc] initWithCapacity:4];
+    NSMutableArray *askUSD = [[NSMutableArray alloc] initWithCapacity:4];
 
-    for (TFHppleElement *element in bidPriceNode) {
-        [bidPrice addObject:[element text]];
+    for (TFHppleElement *element in bidUSDNode) {
+        [bidUSD addObject:[element text]];
     }
-    for (TFHppleElement *element in askPriceNode) {
-        [askPrice addObject:[element text]];
+    for (TFHppleElement *element in askUSDNode) {
+        [askUSD addObject:[element text]];
     }
-    self.goldBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:0]];
-    self.silverBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:1]];
-    self.platinumBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:2]];
-    self.palladiumBidPrice=[self turnPriceStringIntoFloat:[bidPrice objectAtIndex:3]];
-    self.goldAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:0]];
-    self.silverAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:1]];
-    self.platinumAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:2]];
-    self.palladiumAskPrice=[self turnPriceStringIntoFloat:[askPrice objectAtIndex:3]];
+    self.goldBidUSD=[self turnPriceStringIntoFloat:[bidUSD objectAtIndex:0]];
+    self.silverBidUSD=[self turnPriceStringIntoFloat:[bidUSD objectAtIndex:1]];
+    self.platinumBidUSD=[self turnPriceStringIntoFloat:[bidUSD objectAtIndex:2]];
+    self.palladiumBidUSD=[self turnPriceStringIntoFloat:[bidUSD objectAtIndex:3]];
+    self.goldAskUSD=[self turnPriceStringIntoFloat:[askUSD objectAtIndex:0]];
+    self.silverAskUSD=[self turnPriceStringIntoFloat:[askUSD objectAtIndex:1]];
+    self.platinumAskUSD=[self turnPriceStringIntoFloat:[askUSD objectAtIndex:2]];
+    self.palladiumAskUSD=[self turnPriceStringIntoFloat:[askUSD objectAtIndex:3]];
 }
 @end
