@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     PMPriceParser *pmPrice=[[PMPriceParser alloc] init];
-    NSLog(@"\n%f goldBid %f goldAsk \n%f silverBid %f silverAsk \n%f platinumBid %f platinumAsk \n%f palladiumBid %f palladiumAsk", pmPrice.goldBidPrice,pmPrice.goldAskPrice,pmPrice.silverBidPrice,pmPrice.silverAskPrice,pmPrice.platinumBidPrice,pmPrice.platinumAskPrice,pmPrice.palladiumBidPrice,pmPrice.palladiumAskPrice);
+    NSLog(@"\n%f goldBid %f goldAsk \n%f silverBid %f silverAsk \n%f platinumBid %f platinumAsk \n%f palladiumBid %f palladiumAsk", pmPrice.goldBidUSD,pmPrice.goldAskUSD,pmPrice.silverBidUSD,pmPrice.silverAskUSD,pmPrice.platinumBidUSD,pmPrice.platinumAskUSD,pmPrice.palladiumBidUSD,pmPrice.palladiumAskUSD);
     
 }
 
