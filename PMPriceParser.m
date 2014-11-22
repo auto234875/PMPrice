@@ -30,57 +30,6 @@
     
 }
 
--(NSString*)agBidPrice{
-    if (!_agBidPrice) {
-        _agBidPrice = [[NSString alloc]init];
-    }
-    return _agBidPrice;
-}
-
--(NSString*)auBidPrice{
-    if (!_auBidPrice) {
-        _auBidPrice = [[NSString alloc]init];
-    }
-    return _auBidPrice;
-}
--(NSString*)ptBidPrice{
-    if (!_ptBidPrice) {
-        _ptBidPrice = [[NSString alloc]init];
-    }
-    return _ptBidPrice;
-}
--(NSString*)pdBidPrice{
-    if (!_pdBidPrice) {
-        _pdBidPrice = [[NSString alloc]init];
-    }
-    return _pdBidPrice;
-}
--(NSString*)agAskPrice{
-    if (!_agAskPrice) {
-        _agAskPrice = [[NSString alloc]init];
-    }
-    return _agAskPrice;
-}
-
--(NSString*)auAskPrice{
-    if (!_auAskPrice) {
-        _auAskPrice = [[NSString alloc]init];
-    }
-    return _auAskPrice;
-}
--(NSString*)ptAskPrice{
-    if (!_ptAskPrice) {
-        _ptAskPrice = [[NSString alloc]init];
-    }
-    return _ptAskPrice;
-}
--(NSString*)pdAskPrice{
-    if (!_pdAskPrice) {
-        _pdAskPrice = [[NSString alloc]init];
-    }
-    return _pdAskPrice;
-}
-
 -(void)refreshPrice{
     NSURL *apmexURL = [NSURL URLWithString:@"http://www.apmex.com"];
     NSData *apmexData = [NSData dataWithContentsOfURL:apmexURL];
